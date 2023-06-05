@@ -6,4 +6,5 @@ namespace HCLTech.SMACR.Users;
 public interface IUserProfileAppService : IApplicationService
 {
     Task UpdateAsync(UserProfileUpdateDto input);
+    Task<ReadProfileUpdateDto> GetAsync();
 }

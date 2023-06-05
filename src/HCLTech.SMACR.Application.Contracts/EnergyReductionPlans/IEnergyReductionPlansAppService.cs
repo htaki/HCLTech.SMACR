@@ -7,4 +7,6 @@ namespace HCLTech.SMACR.EnergyReductionPlans;
 public interface IEnergyReductionPlansAppService : IApplicationService
 {
     Task<IEnumerable<EnergyReductionPlanReadDto>> GetAllAsync();
+
+    Task<IEnumerable<ReductionPerYearDto>> CreatePlan(IEnumerable<PlanChoosedPerYearDto> data);
 }

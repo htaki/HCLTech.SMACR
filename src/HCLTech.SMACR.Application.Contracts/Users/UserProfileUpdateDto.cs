@@ -41,3 +41,20 @@ public class UserProfileUpdateDto : IValidatableObject
         }
     }
 }
+
+
+public class ReadProfileUpdateDto
+{
+    public string Username { get; set; }
+
+    public string Location { get; set; }
+
+    public string Workplace { get; set; }
+
+    public bool IsApartment { get; set; }
+
+
+    public int FamilySize { get; set; }
+
+
+}

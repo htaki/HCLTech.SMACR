@@ -17,6 +17,27 @@ public class UserProfileAppService : SMACRAppService, IUserProfileAppService
         this.currentUser = currentUser;
         this.userProfileRepository = userProfileRepository;
     }
+
+    public async Task<ReadProfileUpdateDto> GetAsync()
+    {
+        var userProfile = await userProfileRepository.GetByIdentiyUserId(currentUser.Id);
+        if (userProfile == null)
+        {
+            return new ReadProfileUpdateDto { Username = currentUser.Name };
+        }
+        else
+        {
+            return new ReadProfileUpdateDto {
+                Username = currentUser.Name,
+                Location = userProfile.Location,
+                IsApartment = userProfile.IsApartment,
+                Workplace = userProfile.Workplace,
+                FamilySize = userProfile.FamilySize,
+            
+            };
+        }
+    }
+
     public async Task UpdateAsync(UserProfileUpdateDto input)
     {
         var userProfile = await userProfileRepository.GetByIdentiyUserId(currentUser.Id);
@@ -34,7 +55,6 @@ public class UserProfileAppService : SMACRAppService, IUserProfileAppService
 
             userProfile.Update(input.Location, input.Workplace, input.IsApartment, input.FamilySize);
         }
-
 
     }
 }
