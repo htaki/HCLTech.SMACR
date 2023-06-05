@@ -3,6 +3,7 @@ using System;
 using HCLTech.SMACR.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace HCLTech.SMACR.Migrations
 {
     [DbContext(typeof(SMACRDbContext))]
-    partial class SMACRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605123546_UpdatingDataBase")]
+    partial class UpdatingDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace HCLTech.SMACR.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UserProfileId")
+                    b.Property<Guid?>("UserProfileId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -1877,13 +1880,9 @@ namespace HCLTech.SMACR.Migrations
 
             modelBuilder.Entity("HCLTech.SMACR.ElectricConsumptions.ElectricConsumption", b =>
                 {
-                    b.HasOne("HCLTech.SMACR.Users.UserProfile", "UserProfile")
+                    b.HasOne("HCLTech.SMACR.Users.UserProfile", null)
                         .WithMany("ElectricConsumptions")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserProfile");
+                        .HasForeignKey("UserProfileId");
                 });
 
             modelBuilder.Entity("HCLTech.SMACR.EnergyReductionPlans.EnergyReductionPlan", b =>

@@ -86,6 +86,7 @@ public class SMACRDbContext :
         {
             b.ToTable("SMACR-Profiles");
             b.ConfigureByConvention();
+            b.HasQueryFilter(b => !b.IsDeleted);
         });
 
         builder.Entity<EnergyReductionPlan>(b =>
@@ -98,12 +99,14 @@ public class SMACRDbContext :
         {
             b.ToTable("SMACR-ElectricConsumptions");
             b.ConfigureByConvention();
+
         });
 
         builder.Entity<AcceptedReductionPlan>(b =>
         {
             b.ToTable("SMACR-AcceptedReductionPlans");
             b.ConfigureByConvention();
+
         });
 
         builder.Entity<EmissionFactor>(b =>

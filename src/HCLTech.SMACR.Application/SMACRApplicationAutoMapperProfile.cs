@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HCLTech.SMACR.ElectricConsumptions;
 using HCLTech.SMACR.EnergyReductionPlans;
 
 namespace HCLTech.SMACR;
@@ -12,5 +13,6 @@ public class SMACRApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
 
         CreateMap<EnergyReductionPlan, EnergyReductionPlanReadDto>();
+        CreateMap<ElectricConsumption, ElectricConsumptionDto>();
     }
 }

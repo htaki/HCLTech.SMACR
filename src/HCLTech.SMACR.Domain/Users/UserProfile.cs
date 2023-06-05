@@ -40,4 +40,13 @@ public class UserProfile : FullAuditedAggregateRoot<Guid>
         FamilySize = familySize;
     }
 
+    public void ClearConsumption()
+    {
+        this.electricConsumptions.Clear();
+    }
+
+    public void AddConsumption(ElectricConsumption consumption)
+    {
+        this.electricConsumptions.Add(consumption);
+    }
 }

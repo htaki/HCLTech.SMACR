@@ -7,4 +7,5 @@ namespace HCLTech.SMACR.Users;
 public interface IUserProfileRepository : IRepository<UserProfile, Guid>
 {
     Task<UserProfile> GetByIdentiyUserId(Guid? id);
+    Task<UserProfile?> GetProfileWithConsumption();
 }
