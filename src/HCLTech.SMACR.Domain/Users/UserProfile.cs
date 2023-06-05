@@ -22,9 +22,18 @@ public class UserProfile : FullAuditedAggregateRoot<Guid>
     public IReadOnlyCollection<ElectricConsumption> ElectricConsumptions => electricConsumptions.AsReadOnly();
     public IReadOnlyCollection<AcceptedReductionPlan> AcceptedReductionPlans => acceptedReductionPlans.AsReadOnly();
 
-    public UserProfile(Guid identityUserId,  string location, string workplace, bool isApartment, int familySize)
+    public UserProfile(Guid id, Guid identityUserId,  string location, string workplace, bool isApartment, int familySize)
+        :base(id)
     {
         IdentityUserId = identityUserId;
+        Location = location;
+        Workplace = workplace;
+        IsApartment = isApartment;
+        FamilySize = familySize;
+    }
+
+    public void Update(string location, string workplace, bool isApartment, int familySize)
+    {
         Location = location;
         Workplace = workplace;
         IsApartment = isApartment;

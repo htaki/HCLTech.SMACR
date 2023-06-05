@@ -82,13 +82,6 @@ public class SMACRDbContext :
 
         /* Configure your own tables/entities inside here */
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(SMACRConsts.DbTablePrefix + "YourEntities", SMACRConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
-
         builder.Entity<UserProfile>(b =>
         {
             b.ToTable("SMACR-Profiles");
