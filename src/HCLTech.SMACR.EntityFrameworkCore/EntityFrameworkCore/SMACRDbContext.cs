@@ -1,4 +1,6 @@
-﻿using HCLTech.SMACR.ElectricConsumptions;
+﻿using HCLTech.SMACR.AcceptedReductionPlans;
+using HCLTech.SMACR.ElectricConsumptions;
+using HCLTech.SMACR.EmissionFactors;
 using HCLTech.SMACR.EnergyReductionPlans;
 using HCLTech.SMACR.Users;
 using Microsoft.EntityFrameworkCore;
@@ -89,20 +91,33 @@ public class SMACRDbContext :
 
         builder.Entity<UserProfile>(b =>
         {
-            b.ToTable("Profiles");
+            b.ToTable("SMACR-Profiles");
             b.ConfigureByConvention();
         });
 
         builder.Entity<EnergyReductionPlan>(b =>
         {
-            b.ToTable("EnergyReductionPlans");
+            b.ToTable("SMACR-EnergyReductionPlans");
             b.ConfigureByConvention();
         });
 
         builder.Entity<ElectricConsumption>(b =>
         {
-            b.ToTable("ElectricConsumptions");
+            b.ToTable("SMACR-ElectricConsumptions");
             b.ConfigureByConvention();
+        });
+
+        builder.Entity<AcceptedReductionPlan>(b =>
+        {
+            b.ToTable("SMACR-AcceptedReductionPlans");
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<EmissionFactor>(b =>
+        {
+            b.ToTable("SMACR-EmissionFactors");
+            b.ConfigureByConvention();
+            b.HasIndex(b => new { b.Year, b.Country });
         });
     }
 }

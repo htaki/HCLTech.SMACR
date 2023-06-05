@@ -3,6 +3,7 @@ using System;
 using HCLTech.SMACR.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace HCLTech.SMACR.Migrations
 {
     [DbContext(typeof(SMACRDbContext))]
-    partial class SMACRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605101931_AddingTablesPrefix")]
+    partial class AddingTablesPrefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,29 +111,6 @@ namespace HCLTech.SMACR.Migrations
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("SMACR-ElectricConsumptions", (string)null);
-                });
-
-            modelBuilder.Entity("HCLTech.SMACR.EmissionFactors.EmissionFactor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("ActualEmissionFactor")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Year", "Country");
-
-                    b.ToTable("SMACR-EmissionFactors", (string)null);
                 });
 
             modelBuilder.Entity("HCLTech.SMACR.EnergyReductionPlans.EnergyReductionPlan", b =>
