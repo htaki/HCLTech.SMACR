@@ -3,6 +3,7 @@ using System;
 using HCLTech.SMACR.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,69 +12,16 @@ using Volo.Abp.EntityFrameworkCore;
 namespace HCLTech.SMACR.Migrations
 {
     [DbContext(typeof(SMACRDbContext))]
-    partial class SMACRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605094916_AddingEnergyReductionPlansEdited")]
+    partial class AddingEnergyReductionPlansEdited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.Sqlite)
                 .HasAnnotation("ProductVersion", "7.0.1");
-
-            modelBuilder.Entity("HCLTech.SMACR.ElectricConsumptions.ElectricConsumption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("EnergyConsumedInKwh")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("UserProfileId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserProfileId");
-
-                    b.ToTable("ElectricConsumptions", (string)null);
-                });
 
             modelBuilder.Entity("HCLTech.SMACR.EnergyReductionPlans.EnergyReductionPlan", b =>
                 {
@@ -1805,13 +1753,6 @@ namespace HCLTech.SMACR.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
-            modelBuilder.Entity("HCLTech.SMACR.ElectricConsumptions.ElectricConsumption", b =>
-                {
-                    b.HasOne("HCLTech.SMACR.Users.UserProfile", null)
-                        .WithMany("ElectricConsumptions")
-                        .HasForeignKey("UserProfileId");
-                });
-
             modelBuilder.Entity("HCLTech.SMACR.Users.UserProfile", b =>
                 {
                     b.HasOne("Volo.Abp.Identity.IdentityUser", "IdentityUser")
@@ -1963,11 +1904,6 @@ namespace HCLTech.SMACR.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HCLTech.SMACR.Users.UserProfile", b =>
-                {
-                    b.Navigation("ElectricConsumptions");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

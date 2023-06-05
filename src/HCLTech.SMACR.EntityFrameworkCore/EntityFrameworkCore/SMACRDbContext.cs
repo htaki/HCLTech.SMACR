@@ -1,4 +1,6 @@
-﻿using HCLTech.SMACR.Users;
+﻿using HCLTech.SMACR.ElectricConsumptions;
+using HCLTech.SMACR.EnergyReductionPlans;
+using HCLTech.SMACR.Users;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -87,7 +89,19 @@ public class SMACRDbContext :
 
         builder.Entity<UserProfile>(b =>
         {
-            b.ToTable("Profiles", "RMAC");
+            b.ToTable("Profiles");
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<EnergyReductionPlan>(b =>
+        {
+            b.ToTable("EnergyReductionPlans");
+            b.ConfigureByConvention();
+        });
+
+        builder.Entity<ElectricConsumption>(b =>
+        {
+            b.ToTable("ElectricConsumptions");
             b.ConfigureByConvention();
         });
     }
