@@ -47,16 +47,18 @@ public class EnergyReductionPlansAppService : SMACRAppService, IEnergyReductionP
         for(int i = minYear; i <= maxYear; i++)
         {
             var choosenPlans = data.FirstOrDefault(d => d.Year == i);
-            if(choosenPlans == null || choosenPlans.Plans.Length == 0)
+            var initialConsumation = userProfile.ElectricConsumptions
+            .Where(c => c.StartDate >= new System.DateTime(i, 01, 01) && c.EndDate <= new System.DateTime(i, 12, 31))
+            .Sum(c => c.EnergyConsumedInKwh);
+
+            if (choosenPlans == null || choosenPlans.Plans.Length == 0)
             {
-                result.Add(new ReductionPerYearDto { Year = i, Plans = new int[] { }, ReductionOfCO2InKg = 0 });
+                result.Add(new ReductionPerYearDto { Year = i, Plans = new int[] { }, ReductionOfCO2InKg = 0, TotalEnergyConsumed = initialConsumation });
             }
             else
             {
                 var plans = choosenPlans.Plans;
-                var initialConsumation = userProfile.ElectricConsumptions
-                    .Where(c => c.StartDate >= new System.DateTime(i, 01, 01) && c.EndDate <= new System.DateTime(i, 12, 31))
-                    .Sum(c => c.EnergyConsumedInKwh);
+
 
                 var reductionInKWh = reductionPlansList.Where(p => plans.Contains(p.PlanNumber)).Sum(p => p.ReductionInKw);
                 var reductionOfCO2InKg = reductionInKWh * emissionFactors.First(e => e.Year == i).ActualEmissionFactor;
